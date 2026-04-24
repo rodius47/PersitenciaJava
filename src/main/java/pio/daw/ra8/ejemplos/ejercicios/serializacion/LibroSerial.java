@@ -31,6 +31,16 @@ public class LibroSerial implements Serializable{
     public String getAutor()            { return autor; }
     public double getPrecio()           { return precio; }
 
+    public void setTitulo(String Titulo){
+        this.titulo = Titulo;
+    }
+    public void setAutor(String Autor){
+        this.autor = Autor;
+    }
+    public void setPrecio(double Precio){
+        this.precio = Precio;
+    }
+
     @Override
     public String toString() {
         return "Libro{titulo='" + titulo + "', autor=" + autor + ", precio='" + precio + "'}";
@@ -46,35 +56,50 @@ public class LibroSerial implements Serializable{
             return;
         }
     }
-        
 
-        // Para guardar la lista 
-
-        // Para recuperar la lista
-        public void Cargar(Path ruta){
-            // try (ObjectOutputStream oos = new ObjectOutputStream(
-            //         new FileOutputStream(ruta.toFile()))) {
-            //     oos.writeObject(ruta);
-            //     System.out.println("Guardado en: " + ruta);
-            // } catch (IOException e) {
-            //     System.err.println("Error al serializar: " + e.getMessage());
-            //     return;
-            // }
-
-            System.out.println("\nDeserializando...");
-            try (ObjectInputStream ois = new ObjectInputStream(
+    // Para recuperar la lista
+    public static Libro cargar(Path ruta){
+        Libro recuperado = null;
+        try (ObjectInputStream ois = new ObjectInputStream(
                     new FileInputStream(ruta.toFile()))) {
 
-                @SuppressWarnings("unchecked")
-                List<LibroSerial> recuperados = (List<LibroSerial>) ois.readObject();
-
-                recuperados.forEach(a -> System.out.println("  - " + a));
-                System.out.println("\n✓ Lista recuperada: " + recuperados.size() + " libros.");
+                recuperado = (Libro) ois.readObject();
+                System.out.println("\n✓ Recuperado: " + recuperado);
 
             } catch (IOException | ClassNotFoundException e) {
                 System.err.println("Error al deserializar: " + e.getMessage());
             }
-        }
+            return recuperado;
+    }
+        
+
+        // Para guardar la lista 
+
+        
+        // public void Cargar(Path ruta){
+        //     // try (ObjectOutputStream oos = new ObjectOutputStream(
+        //     //         new FileOutputStream(ruta.toFile()))) {
+        //     //     oos.writeObject(ruta);
+        //     //     System.out.println("Guardado en: " + ruta);
+        //     // } catch (IOException e) {
+        //     //     System.err.println("Error al serializar: " + e.getMessage());
+        //     //     return;
+        //     // }
+
+        //     System.out.println("\nDeserializando...");
+        //     try (ObjectInputStream ois = new ObjectInputStream(
+        //             new FileInputStream(ruta.toFile()))) {
+
+        //         @SuppressWarnings("unchecked")
+        //         List<LibroSerial> recuperados = (List<LibroSerial>) ois.readObject();
+
+        //         recuperados.forEach(a -> System.out.println("  - " + a));
+        //         System.out.println("\n✓ Lista recuperada: " + recuperados.size() + " libros.");
+
+        //     } catch (IOException | ClassNotFoundException e) {
+        //         System.err.println("Error al deserializar: " + e.getMessage());
+        //     }
+        // }
 
         // Para recuperar la lista
         // System.out.println("\nDeserializando...");
@@ -97,7 +122,15 @@ public class LibroSerial implements Serializable{
             libros.add(new LibroSerial("La mañana de aller",   "María Morlan", 9.5));
             libros.add(new LibroSerial("Un mundo sin...",   "Blanca Venebiento", 12.5));
 
-            System.out.println("Serializando " + libros.size() + " libros...");
+            System.out.println(libros);
+
+            libros.guardar(rutaPorDefecto);
+
+            System.out.println("Libro guardado");
+
+            Libro librosCargados = libros.cargar(rutaPorDefecto);
+
+            // System.out.println("Serializando " + libros.size() + " libros...");
     }
 }
 

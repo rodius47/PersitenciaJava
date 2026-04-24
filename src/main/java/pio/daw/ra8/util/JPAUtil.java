@@ -12,6 +12,18 @@ import java.util.Map;
  */
 public class JPAUtil {
 
+
+    public static EntityManagerFactory crearEMFWithoutDelete(String fichero) {
+        // Crear directorio padre si no existe (p.e. target/)
+        File f = new File(fichero);
+        if (f.getParentFile() != null) {
+            f.getParentFile().mkdirs();
+        }
+        Map<String, String> props = new HashMap<>();
+        props.put("jakarta.persistence.jdbc.url", fichero);
+        return Persistence.createEntityManagerFactory("ra8DB", props);
+    }
+    
     /**
      * Crea un EntityManagerFactory apuntando al fichero indicado.
      * Borra el fichero previo si existe (inicio limpio en cada demo).
