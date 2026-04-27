@@ -34,7 +34,7 @@ public class Libro {
     public void   setPrecio(double p)      { precio = p; }
     public int    getAnioPublicacion()     { return anioPublicacion; }
     public Autor  getAutor()               { return autor; }
-    public void   setAutor(Autor a)        { autor = a; }
+    public void   setAutor(String a)        { autor = a; }
 
     @Override
     public String toString() {
@@ -43,5 +43,10 @@ public class Libro {
                + "', isbn='" + isbn + "', precio=" + precio
                + ", anio=" + anioPublicacion
                + ", autor='" + nombreAutor + "'}";
+    }
+
+    public void setAutor(String a) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setAutor'");
     }
 }
