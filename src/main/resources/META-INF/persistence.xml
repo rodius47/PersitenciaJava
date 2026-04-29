@@ -10,7 +10,7 @@
     <class>pio.daw.ra8.ejemplos.relaciones.Moto</class>
     <class>pio.daw.ra8.ejemplos.relaciones.Autor</class>
     <class>pio.daw.ra8.ejemplos.relaciones.Libro</class>
-        <class>pio.daw.ra8.ejemplos.jpa.Libro</class>
+    <class>pio.daw.ra8.ejemplos.jpa.Libro</class>
     <class>pio.daw.ra8.mercadoLibre.Simulacion</class>
     <class>pio.daw.ra8.mercadoLibre.Individuo</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>

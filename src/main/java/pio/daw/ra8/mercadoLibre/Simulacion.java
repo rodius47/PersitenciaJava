@@ -7,8 +7,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import pio.daw.ra8.ejemplos.relaciones.Vehiculo;
 import pio.daw.ra8.util.JPAUtil;
+
 
 @Entity
 /**
