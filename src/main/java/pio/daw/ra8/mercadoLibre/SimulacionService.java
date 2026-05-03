@@ -9,7 +9,7 @@ import pio.daw.ra8.util.JPAUtil;
 
 public class SimulacionService {
     public static int getRandomId() {
-        int range = (4 - 1) + 1;
+        int range = (10 - 1) + 1;
         int random = (int) ((range * Math.random()) + 1);
         return random;
     }
@@ -102,17 +102,33 @@ public class SimulacionService {
             todos.forEach(I -> System.out.println("  " + I));
 
 
-            // System.out.println("──  Individuos  más rico y más pobreactualizados---------------─────");
-            // System.err.println("\n── Individuo más rico ──\n");
+             System.out.println("──  Individuos  más rico y más pobreactualizados---------------─────");
+             System.err.println("\n── Individuo más rico ──\n");
+              todos = em.createQuery(
+                "SELECT I FROM Individuo I ORDER BY I.saldoActual DESC",
+                Individuo.class
+            ).setMaxResults(1).getResultList();
+            todos.forEach(I -> System.out.println("  " + I));
             //  List<Individuo> maximo = em.createQuery(
             //     "SELECT I FROM Individuo I WHERE I.saldoActual = (SELECT MAX(I2.saldoActual) FROM Individuo I2)",
             //     Individuo.class
             // ).getResultList();
-            // System.err.println("\n── Individuo más pobre ──\n");
+             System.err.println("\n── Individuo más pobre ──\n");
+             todos = em.createQuery(
+                "SELECT I FROM Individuo I ORDER BY I.saldoActual ASC",
+                Individuo.class
+            ).setMaxResults(1).getResultList();
+            todos.forEach(I -> System.out.println("  " + I));
             // List<Individuo> minimo = em.createQuery(
             //     "SELECT I FROM Individuo I WHERE I.saldoActual = (SELECT MIN(saldoActual) FROM Individuo) "
             // ).getResultList();
             // todos.forEach(I -> System.out.println("  " + I));
+            System.err.println("\n── Individuo con más del 50% del saldo inicial ──\n");
+             todos = em.createQuery(
+                "SELECT I FROM Individuo I WHERE I.saldoActual >= 50 ORDER BY I.saldoActual DESC ",
+                Individuo.class
+            ).getResultList();
+            todos.forEach(I -> System.out.println("  " + I));
 
 
         } finally {
