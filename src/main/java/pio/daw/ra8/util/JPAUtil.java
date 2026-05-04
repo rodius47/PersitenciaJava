@@ -40,6 +40,15 @@ public class JPAUtil {
         return Persistence.createEntityManagerFactory("ra8DB", props);
     }
 
+    /**
+     * Crea un EntityManagerFactory apuntando al fichero indicado.
+     * Borra el fichero previo si existe (inicio limpio en cada demo).
+     */
+    public static EntityManagerFactory crearEMF(String fichero) {
+        eliminarBBDD(fichero);
+        return crearEMFWithoutDelete(fichero);
+    }
+
     /** Elimina el fichero .odb y el fichero de diario asociado ($). */
     public static void eliminarBBDD(String fichero) {
         new File(fichero).delete();
